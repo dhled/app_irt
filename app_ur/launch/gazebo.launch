@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="gazebo_gui" default="true"/>
+  <arg name="urdf_path" default="$(find app_irtjv)/urdf/ur_sim.urdf.xacro"/>
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find app_irtjv)/worlds/robot.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gazebo_gui)"/>
+  </include>
+
+  <!-- send robot urdf to param server -->
+  <include file="$(find app_ur)/launch/ur_upload.launch">
+    <arg name="limited" value="true"/>
+	  <arg name="sim" value="true"/>
+  </include>
+
+  <!-- push robot_description to factory and spawn robot in gazebo at the origin, change x,y,z arguments to spawn in a different position -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model" args="-urdf -param robot_description -model robot -x 0 -y 0 -z 0.75"
+    respawn="false" output="screen" />
+
+  <include file="$(find ur_gazebo)/launch/controller_utils.launch"/>
+
+  <rosparam file="$(find ur_gazebo)/controller/arm_controller_ur5.yaml" command="load"/>
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" args="spawn arm_controller" respawn="false" output="screen"/>
+
+
+</launch>

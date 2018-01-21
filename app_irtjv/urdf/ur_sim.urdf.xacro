@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://ros.org/wiki/xacro" name="ur5_kinect" >
+
+  <xacro:include filename="$(find ur_description)/urdf/ur5.urdf.xacro" />
+  <xacro:include filename="$(find ur_description)/urdf/common.gazebo.xacro" />
+  <xacro:include filename="$(find app_irtjv)/urdf/table_ur.urdf.xacro" />
+  <xacro:include filename="$(find app_irtjv)/urdf/kinect.xacro"/>
+
+  <xacro:arg name="sim" default="true"/>
+  <xacro:property name="sim" value="$(arg sim)"/>
+
+	<!-- setup empty world -->
+	<link name="world"/>
+
+	<!-- include platform -->
+	<xacro:table prefix="" parent="world">
+  	  <origin xyz="-0.24 -0.78 -0.75" rpy="0 0 0"/>
+	</xacro:table>
+
+  	<!-- arm -->
+	<xacro:ur5_robot prefix="" joint_limited="true"/>
+
+	<joint name="world_joint" type="fixed">
+  	  <parent link="world" />
+  	  <child link = "base_link" />
+  	  <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 ${pi}" />
+	</joint>
+
+   	<link name="ee_link_mod"/>
+	<joint name="ee_joint_mod" type="fixed">
+		<parent link="ee_link"/>
+		<child link="ee_link_mod"/>
+		<origin xyz=" 0 0 0" rpy="0 ${-pi/2} 0"/>
+	</joint>
+
+	<!-- include camera -->
+	<xacro:if value="${sim}">
+	  <xacro:sensor_kinect parent="world">
+		<origin xyz="0.14 -0.76 1.22" rpy="0 ${pi/2 - 20 * pi/180} ${pi/2}"/>
+	  </xacro:sensor_kinect>
+	</xacro:if>
+
+	<xacro:unless value="${sim}">
+	  <link name="camera_link"/>
+	  <joint name="camera_joint" type="fixed">
+		<parent link="world"/>
+		<child link="camera_link"/>
+		<origin xyz="0.08 -0.78 1.28" rpy="0 ${pi/2 - 20 * pi/180} ${pi/2}"/>
+	  </joint>
+	</xacro:unless>
+</robot>

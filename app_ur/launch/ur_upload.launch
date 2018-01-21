@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="true"/>
+  <arg name="sim" default="true"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find app_irtjv)/urdf/ur_sim.urdf.xacro' sim:=$(arg sim)" />
+</launch>

@@ -1,0 +1,61 @@
+#!/usr/bin/env python
+
+import rospy
+import smach
+
+from qt_smach_viewer.introspection import IntrospectionServer
+from app_scripts.moveit_states import GenerateCartesianPlan, Move
+from app_scripts.other_states import CheckPoseChange, GetPoseTracker, EmptyState
+
+def Moveit_sm():
+    sm = smach.StateMachine(outcomes=["exit"])
+    sm.userdata.group_name = "manipulator"
+    sm.userdata.namespace = ""
+    with sm:
+        sm.add('Sync', GetPoseTracker(), transitions={"updated":'Plan', "stopped":"exit"})
+        sm.add('Plan', GenerateCartesianPlan(), transitions={"preempt":'Sync', "timeout":'Sync', "success":'Move'})
+        sm.add('Move', Move(), transitions={"preempt":'Sync', "timeout":'Sync', "success":'Sync'})
+
+    return sm
+
+def Tracker_sm():
+    sm = smach.StateMachine(outcomes=["exit"])
+    with sm:
+        sm.add('Track', CheckPoseChange(), transitions={"changed":'Track', "stopped":"exit"})
+    return sm
+
+def Concurrence():
+    Synchro_cc = smach.Concurrence(outcomes = ["exit"],
+                                   default_outcome='exit',
+                                   outcome_map = {"exit" : {'MoveitSM':"exit",'TrackerSM':"exit"}})
+
+    with Synchro_cc:
+        Synchro_cc.add('TrackerSM',Tracker_sm())
+        Synchro_cc.add('MoveitSM',Moveit_sm())
+
+    return Synchro_cc
+
+def MainSM():
+    sm = smach.StateMachine(outcomes=["exit"])
+
+    with sm:
+        sm.add('Wait', EmptyState(), transitions={"continue": 'Concurrence'})
+        sm.add('Concurrence', Concurrence(), transitions={"exit": 'exit'})
+
+    return sm
+
+def main():
+    main_sm = MainSM()
+
+    introspection_server = IntrospectionServer(main_sm)
+    introspection_server.start()
+    rospy.sleep(3.0)
+    outcome = main_sm.execute()
+    rospy.loginfo("Result : " + outcome)
+    introspection_server.stop()
+
+##-----------------------------------------------------------------------------------
+
+if __name__ == '__main__':
+    rospy.init_node('tutorial_node')
+    main()

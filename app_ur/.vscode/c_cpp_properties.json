@@ -1,0 +1,39 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "",
+        "limitSymbolsToIncludedHeaders": true
+      },
+      "includePath": [
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/devel/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/descartes_light/descartes_ikfast/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/descartes_light/descartes_light/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/descartes_light/descartes_opw/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/descartes_light/descartes_samplers/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/opw_kinematics/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_collision/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_common/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_environment/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_geometry/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_kinematics/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_planning/tesseract_motion_planners/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_planning/tesseract_process_planners/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_scene_graph/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_urdf/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/tesseract/tesseract/tesseract_visualization/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/trajopt/trajopt/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/trajopt/trajopt_ifopt/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/trajopt/trajopt_sco/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/trajopt/trajopt_optimizers/trajopt_sqp/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/trajopt/trajopt_utils/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/universal_robot/ur_kinematics/include/**",
+        "/home/ipa-led/ros-workspaces/moveit_rosin_ws/src/trajopt/trajopt_ext/vhacd/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS"
+    }
+  ]
+}

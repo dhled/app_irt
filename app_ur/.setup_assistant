@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: app_irtjv
+    relative_path: urdf/ur_sim.urdf.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/ur5_kinect.srdf
+  CONFIG:
+    author_name: led
+    author_email: led@ipa.fhg.de
+    generated_timestamp: 1593519781

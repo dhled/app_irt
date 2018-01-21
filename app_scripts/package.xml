@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package>
+  <name>app_scripts</name>
+  <version>0.0.0</version>
+  <description>The app_scripts package</description>
+  <license>TODO</license>
+  <maintainer email="led@ipa.fhg.de">led</maintainer>
+
+
+  <!--   <test_depend>gtest</test_depend> -->
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>ar_track_alvar</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>moveit_msgs</run_depend>
+
+  <export>
+  </export>
+</package>
